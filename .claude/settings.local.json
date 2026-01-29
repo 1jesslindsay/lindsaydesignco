@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"c:/Users/1jess/Desktop/Claude_LDC website\" remote -v)",
+      "Bash(npm install:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "Bash(gh repo edit:*)",
+      "Bash(git fetch:*)",
+      "Bash(tasklist:*)",
+      "Bash(taskkill:*)",
+      "Bash(cmd.exe /c \"taskkill /F /IM git.exe\")",
+      "Bash(git init:*)"
+    ]
+  }
+}
