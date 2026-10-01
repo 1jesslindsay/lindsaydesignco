@@ -1,5 +1,4 @@
-            <!DOCTYPE html>
-<!-- Fixed deployment structure -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,14 +14,16 @@
     <meta property="og:url" content="https://lindsaydesignco.com/">
     <meta property="og:title" content="Lindsay Design Co - Professional Graphic Design Services">
     <meta property="og:description" content="Transforming ideas into stunning visuals. Professional graphic design services including logo design, branding, print media, e-learning, and photography.">
-    <meta property="og:image" content="https://lindsaydesignco.com/Images/LDC_Logo_share.png">
+    <meta property="og:image" content="https://lindsaydesignco.com/Images/share-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://lindsaydesignco.com/">
     <meta name="twitter:title" content="Lindsay Design Co - Professional Graphic Design Services">
     <meta name="twitter:description" content="Transforming ideas into stunning visuals. Professional graphic design services including logo design, branding, print media, e-learning, and photography.">
-    <meta name="twitter:image" content="https://lindsaydesignco.com/Images/LDC_Logo_share.png">
+    <meta name="twitter:image" content="https://lindsaydesignco.com/Images/share-image.jpg">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://lindsaydesignco.com/">
@@ -34,7 +35,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Analytics - Replace GA_MEASUREMENT_ID with your actual ID -->
+    <script>
+        // Apply saved theme before the page draws to avoid a flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme') ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QPQN55LDLK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -91,19 +100,19 @@
             <h2 class="fade-in">Our Portfolio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="Images/logo_Final_16.webp" alt="Logo Design" width="246" height="361" loading="lazy">
+                    <img src="Images/logo_Final_16.webp" alt="Wings &amp; Eagles Air Show logo" width="246" height="361" loading="lazy">
                     <h3>Logo Design</h3>
-                    <p>A bold and modern logo for a tech startup.</p>
+                    <p>Event logo for the Wings &amp; Eagles Air Show in Klamath Falls.</p>
                 </div>
                 <div class="portfolio-item">
-                    <img src="Images/WE_TShirt_Final_10.webp" alt="Merchandise Design" width="339" height="349" loading="lazy">
+                    <img src="Images/WE_TShirt_Final_10.webp" alt="Wings &amp; Eagles Air Show apparel graphic" width="339" height="349" loading="lazy">
                     <h3>Merchandise Design</h3>
-                    <p>Complete branding for a local coffee shop.</p>
+                    <p>Apparel graphic for the 2025 Wings &amp; Eagles Air Show.</p>
                 </div>
                 <div class="portfolio-item">
-                    <img src="Images/Final_18X24_5.jpg" alt="Poster Design" width="273" height="361" loading="lazy">
+                    <img src="Images/Final_18X24_5.jpg" alt="Wings &amp; Eagles Air Show 2025 poster" width="273" height="361" loading="lazy">
                     <h3>Poster Design</h3>
-                    <p>Vibrant event poster for a music festival.</p>
+                    <p>Official poster for the 2025 Wings &amp; Eagles Air Show.</p>
                 </div>
             </div>
             <div class="portfolio-link">
@@ -165,9 +174,10 @@
     <footer>
         <div class="container">
             <p>© 2026 Lindsay Design Co. All rights reserved.</p>
+            <p>Established 2015</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/1jess.lindsay/" target="_blank" rel="noopener">Instagram</a>
-                <a href="https://www.linkedin.com/in/jess-lindsay-a94a17b0569783or2025/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/jess-lindsay-designer/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
         </div>
     </footer>
@@ -187,13 +197,6 @@
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
         }
-
-        // Load saved theme on page load
-        (function() {
-            const savedTheme = localStorage.getItem('theme') ||
-                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        })();
     </script>
 
     <script>

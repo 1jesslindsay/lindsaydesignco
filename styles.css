@@ -589,6 +589,10 @@ footer p {
     color: var(--color-text-light);
     font-size: 28px;
     font-weight: bold;
+    line-height: 1;
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
     z-index: 2001;
     transition: color var(--transition);
@@ -596,6 +600,13 @@ footer p {
 
 .close:hover {
     color: var(--color-text);
+}
+
+.close:focus-visible,
+.portfolio-item:focus-visible,
+.photography-item:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
 }
 
 #modalImage, #modalPhoto {

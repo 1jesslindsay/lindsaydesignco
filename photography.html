@@ -14,14 +14,16 @@
     <meta property="og:url" content="https://lindsaydesignco.com/photography.html">
     <meta property="og:title" content="Photography - Lindsay Design Co">
     <meta property="og:description" content="Professional photography services by Lindsay Design Co. Specializing in commercial photography, event documentation, portraits, and artistic film photography.">
-    <meta property="og:image" content="https://lindsaydesignco.com/Images/LDC_Logo_share.png">
+    <meta property="og:image" content="https://lindsaydesignco.com/Images/share-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://lindsaydesignco.com/photography.html">
     <meta name="twitter:title" content="Photography - Lindsay Design Co">
     <meta name="twitter:description" content="Professional photography services by Lindsay Design Co. Specializing in commercial photography, event documentation, portraits, and artistic film photography.">
-    <meta name="twitter:image" content="https://lindsaydesignco.com/Images/LDC_Logo_share.png">
+    <meta name="twitter:image" content="https://lindsaydesignco.com/Images/share-image.jpg">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://lindsaydesignco.com/photography.html">
@@ -33,7 +35,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Analytics - Replace GA_MEASUREMENT_ID with your actual ID -->
+    <script>
+        // Apply saved theme before the page draws to avoid a flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme') ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QPQN55LDLK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -74,7 +84,7 @@
     <!-- Modal for Photo Enlargement -->
     <div id="photoModal" class="modal" onclick="closePhotoModal()">
         <div class="modal-content photo-modal-content" onclick="event.stopPropagation()">
-            <span class="close" onclick="closePhotoModal()">&times;</span>
+            <button type="button" class="close" onclick="closePhotoModal()" aria-label="Close">&times;</button>
             <img id="modalPhoto" src="" alt="">
             <div class="modal-info">
                 <h3 id="photoModalTitle"></h3>
@@ -86,7 +96,7 @@
     <!-- Modal for Placeholder Photos -->
     <div id="photoPlaceholderModal" class="modal" onclick="closePhotoPlaceholderModal()">
         <div class="modal-content placeholder-modal-content" onclick="event.stopPropagation()">
-            <span class="close" onclick="closePhotoPlaceholderModal()">&times;</span>
+            <button type="button" class="close" onclick="closePhotoPlaceholderModal()" aria-label="Close">&times;</button>
             <div class="placeholder-modal-display">
                 <div class="placeholder-large photo-placeholder-large">
                     <div class="placeholder-large-content">
@@ -105,6 +115,7 @@
     <script>
         function openPhotoModal(imageSrc, title, description) {
             document.getElementById('photoModal').style.display = 'block';
+            document.querySelector('#photoModal .close').focus();
             document.getElementById('modalPhoto').src = imageSrc;
             document.getElementById('photoModalTitle').textContent = title;
             document.getElementById('photoModalDescription').textContent = description;
@@ -118,6 +129,7 @@
 
         function openPhotoPlaceholder(title, description) {
             document.getElementById('photoPlaceholderModal').style.display = 'block';
+            document.querySelector('#photoPlaceholderModal .close').focus();
             document.getElementById('photoPlaceholderModalTitle').textContent = title;
             document.getElementById('photoPlaceholderModalName').textContent = title;
             document.getElementById('photoPlaceholderModalDescription').textContent = description;
@@ -128,6 +140,20 @@
             document.getElementById('photoPlaceholderModal').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
+
+        // Let keyboard users open portfolio/photo tiles with Enter or Space
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.portfolio-item[onclick], .photography-item[onclick]').forEach(el => {
+                el.setAttribute('role', 'button');
+                el.setAttribute('tabindex', '0');
+                el.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        el.click();
+                    }
+                });
+            });
+        });
 
         // Close modal when pressing Escape key
         document.addEventListener('keydown', function(event) {
@@ -196,15 +222,15 @@
                     </div>
                     <div class="service-item">
                         <h3>Digital Retouching</h3>
-                        <p>Professional photo editing and retouching services to enhance and perfect your visual content.</p>
+                        <p>Detailed cleanup of portraits and product shots, from blemishes to stray objects, with natural-looking results.</p>
                     </div>
                     <div class="service-item">
                         <h3>Photo Editing</h3>
-                        <p>Professional photo editing and retouching services to enhance and perfect your visual content.</p>
+                        <p>Color correction, exposure, and cropping that give a full set of photos a consistent, polished look.</p>
                     </div>
                     <div class="service-item">
                         <h3>Film Development</h3>
-                        <p>Professional photo editing and retouching services to enhance and perfect your visual content.</p>
+                        <p>Developing and scanning film into high-quality digital files ready to share or print.</p>
                     </div>
                 </div>
             </div>
@@ -223,7 +249,7 @@
             <p>Established 2015</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/1jess.lindsay/" target="_blank" rel="noopener">Instagram</a>
-                <a href="https://www.linkedin.com/in/jess-lindsay-a94a17b0569783or2025/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/jess-lindsay-designer/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
         </div>
     </footer>
@@ -243,13 +269,6 @@
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
         }
-
-        // Load saved theme on page load
-        (function() {
-            const savedTheme = localStorage.getItem('theme') ||
-                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        })();
     </script>
 
     <script>

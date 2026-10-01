@@ -14,14 +14,16 @@
     <meta property="og:url" content="https://lindsaydesignco.com/portfolio.html">
     <meta property="og:title" content="Portfolio - Lindsay Design Co">
     <meta property="og:description" content="Explore the creative portfolio of Lindsay Design Co. View our logo designs, merchandise, event posters, apparel graphics, and branding projects.">
-    <meta property="og:image" content="https://lindsaydesignco.com/Images/LDC_Logo_share.png">
+    <meta property="og:image" content="https://lindsaydesignco.com/Images/share-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://lindsaydesignco.com/portfolio.html">
     <meta name="twitter:title" content="Portfolio - Lindsay Design Co">
     <meta name="twitter:description" content="Explore the creative portfolio of Lindsay Design Co. View our logo designs, merchandise, event posters, apparel graphics, and branding projects.">
-    <meta name="twitter:image" content="https://lindsaydesignco.com/Images/LDC_Logo_share.png">
+    <meta name="twitter:image" content="https://lindsaydesignco.com/Images/share-image.jpg">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://lindsaydesignco.com/portfolio.html">
@@ -33,7 +35,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Analytics - Replace GA_MEASUREMENT_ID with your actual ID -->
+    <script>
+        // Apply saved theme before the page draws to avoid a flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme') ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QPQN55LDLK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -75,7 +85,7 @@
     <!-- Modal for Image Enlargement -->
     <div id="imageModal" class="modal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <button type="button" class="close" onclick="closeModal()" aria-label="Close">&times;</button>
             <img id="modalImage" src="" alt="">
             <div class="modal-info">
                 <h3 id="modalTitle"></h3>
@@ -87,7 +97,7 @@
     <!-- Modal for Placeholder Items -->
     <div id="placeholderModal" class="modal" onclick="closePlaceholderModal()">
         <div class="modal-content placeholder-modal-content" onclick="event.stopPropagation()">
-            <span class="close" onclick="closePlaceholderModal()">&times;</span>
+            <button type="button" class="close" onclick="closePlaceholderModal()" aria-label="Close">&times;</button>
             <div class="placeholder-modal-display">
                 <div class="placeholder-large">
                     <div class="placeholder-large-content">
@@ -106,6 +116,7 @@
     <script>
         function openModal(imageSrc, title, description) {
             document.getElementById('imageModal').style.display = 'block';
+            document.querySelector('#imageModal .close').focus();
             document.getElementById('modalImage').src = imageSrc;
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalDescription').textContent = description;
@@ -119,6 +130,7 @@
 
         function openPlaceholderModal(title, description) {
             document.getElementById('placeholderModal').style.display = 'block';
+            document.querySelector('#placeholderModal .close').focus();
             document.getElementById('placeholderModalTitle').textContent = title;
             document.getElementById('placeholderModalName').textContent = title;
             document.getElementById('placeholderModalDescription').textContent = description;
@@ -129,6 +141,20 @@
             document.getElementById('placeholderModal').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
+
+        // Let keyboard users open portfolio/photo tiles with Enter or Space
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.portfolio-item[onclick], .photography-item[onclick]').forEach(el => {
+                el.setAttribute('role', 'button');
+                el.setAttribute('tabindex', '0');
+                el.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        el.click();
+                    }
+                });
+            });
+        });
 
         // Close modal when pressing Escape key
         document.addEventListener('keydown', function(event) {
@@ -143,30 +169,31 @@
         <div class="container">
             <h2>Our Creative Works</h2>
             <div class="portfolio-grid">
-                <div class="portfolio-item" onclick="openModal('Images/logo_Final_16.webp', 'Logo Design', 'A bold and modern logo for a tech startup that captures innovation and forward-thinking vision.')">
-                    <img src="Images/logo_Final_16.webp" alt="Logo Design" width="246" height="361" loading="lazy">
+                <div class="portfolio-item" onclick="openModal('Images/logo_Final_16.webp', 'Logo Design', 'Event logo for the Wings & Eagles Air Show in Klamath Falls, pairing an F-35 and a jet formation with the region’s pine-covered landscape.')">
+                    <img src="Images/logo_Final_16.webp" alt="Wings &amp; Eagles Air Show logo" width="246" height="361" loading="lazy">
                     <div class="click-indicator">Click to Enlarge</div>
                     <h3>Logo Design</h3>
-                    <p>A bold and modern logo for a tech startup that captures innovation and forward-thinking vision.</p>
+                    <p>Event logo for the Wings &amp; Eagles Air Show in Klamath Falls, pairing an F-35 and a jet formation with the region’s pine-covered landscape.</p>
                 </div>
-                <div class="portfolio-item" onclick="openModal('Images/Tumbler_20oz.webp', 'Merchandise Design', 'Complete branded merchandise collection for a local coffee shop identity campaign.')">
-                    <img src="Images/Tumbler_20oz.webp" alt="Merchandise Design" width="709" height="1400" loading="lazy">
+                <div class="portfolio-item" onclick="openModal('Images/Tumbler_20oz.webp', 'Merchandise Design', 'Engraved “Eagle Driver” tumbler design featuring an F-15 and an eagle set inside the Oregon state outline.')">
+                    <img src="Images/Tumbler_20oz.webp" alt="Eagle Driver engraved tumbler" width="709" height="1400" loading="lazy">
                     <div class="click-indicator">Click to Enlarge</div>
                     <h3>Merchandise Design</h3>
-                    <p>Complete branded merchandise collection for a local coffee shop's identity campaign.</p>
+                    <p>Engraved “Eagle Driver” tumbler design featuring an F-15 and an eagle set inside the Oregon state outline.</p>
                 </div>
                 <div class="portfolio-item" onclick="openModal('Images/Final_18X24_Wbleed.webp', 'Event Poster Design', 'Vibrant promotional poster for Wings & Eagles air show featuring dynamic aviation graphics.')">
-                    <img src="Images/Final_18X24_Wbleed.webp" alt="Poster Design" width="1069" height="1400" loading="lazy">
+                    <img src="Images/Final_18X24_Wbleed.webp" alt="Wings &amp; Eagles Air Show 2025 poster" width="1069" height="1400" loading="lazy">
                     <div class="click-indicator">Click to Enlarge</div>
                     <h3>Event Poster Design</h3>
                     <p>Vibrant promotional poster for Wings & Eagles air show featuring dynamic aviation graphics.</p>
                 </div>
-                <div class="portfolio-item" onclick="openModal('Images/TeeShirt_Mockup_17.webp', 'Apparel Graphics', 'Custom t-shirt design combining bold typography with aviation-inspired visual elements.')">
-                    <img src="Images/TeeShirt_Mockup_17.webp" alt="T-Shirt Design" width="1247" height="1400" loading="lazy">
+                <div class="portfolio-item" onclick="openModal('Images/TeeShirt_Mockup_17.webp', 'Apparel Graphics', 'T-shirt design for the 2025 Wings & Eagles Air Show, featuring an F-15, a Thunderbirds F-16, and an F-35.')">
+                    <img src="Images/TeeShirt_Mockup_17.webp" alt="Wings &amp; Eagles Air Show t-shirt mockup" width="1247" height="1400" loading="lazy">
                     <div class="click-indicator">Click to Enlarge</div>
                     <h3>Apparel Graphics</h3>
-                    <p>Custom t-shirt design combining bold typography with aviation-inspired visual elements.</p>
+                    <p>T-shirt design for the 2025 Wings &amp; Eagles Air Show, featuring an F-15, a Thunderbirds F-16, and an F-35.</p>
                 </div>
+                <!-- "Coming Soon" placeholder tiles, hidden until real work is ready. Remove the comment markers to show them again.
                 <div class="portfolio-item" onclick="openPlaceholderModal('Event Marketing', 'Comprehensive marketing materials for large-scale events and promotional campaigns.')">
                     <div class="placeholder-item">
                         <div class="placeholder-content">
@@ -255,6 +282,7 @@
                     <h3>Print Design</h3>
                     <p>Professional corporate annual report with sophisticated layout and visual storytelling.</p>
                 </div>
+                -->
             </div>
             
             <div class="portfolio-cta">
@@ -271,7 +299,7 @@
             <p>Established 2015</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/1jess.lindsay/" target="_blank" rel="noopener">Instagram</a>
-                <a href="https://www.linkedin.com/in/jess-lindsay-a94a17b0569783or2025/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/jess-lindsay-designer/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
         </div>
     </footer>
@@ -291,13 +319,6 @@
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
         }
-
-        // Load saved theme on page load
-        (function() {
-            const savedTheme = localStorage.getItem('theme') ||
-                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        })();
     </script>
 
     <script>
